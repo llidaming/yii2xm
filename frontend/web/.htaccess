@@ -1,0 +1,12 @@
+#开启重写
+RewriteEngine on
+
+# if a directory or a file exists, use it directly
+#判断不是文件
+RewriteCond %{REQUEST_FILENAME} !-f
+#判断不是目录
+RewriteCond %{REQUEST_FILENAME} !-d
+#以上都满足就执行下面的文件
+# otherwise forward it to index.php
+RewriteRule . index.php
+
