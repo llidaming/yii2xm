@@ -1,60 +1,56 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
-
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
-
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
-
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
-
-DIRECTORY STRUCTURE
--------------------
+## 项目介绍
+```
+1.1项目描述简介
+类似京东商城的B2C商城
+C2C 客户对客户
+B2B  
+O2O 线上对线下
+P2P 
+ERP 
+CRM 客户关系管理
+1.2主要功能模块
+系统包括：
+后台：品牌管理、商品分类管理、订单管理、系统管理和会员管理六个功能模块。
+前台：首页、商品展示、商品购买、订单管理、在线支付等。
+1.3 开发环境和技术
 
 ```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
+
+<table border=1px>
+<tr><th>开发环境</th><th>开发工具</th><th>相关技术</th></tr>
+<tr><td>window</td><td>phpstorm+php7.0+git+apache</td><td>yii2+CDN+jquery</td></tr>
+</table>
+
+##  品牌功能模块
+```
+3.1.需求
+品牌管理功能涉及品牌的列表展示，品牌添加，修改，删除功能。
+品牌需要保存缩略图和简介。
+品牌删除使用逻辑删除。
+设置一个状态为1表示显示0表示隐藏两次0表示彻底删除
+
+```
+## 文章功能模块
+```
+1.创建三个表 文章分类表 、文章表、 内容表
+文章分类表：
+  创建一个状态为来表示显示或者隐藏
+  同是也创建一个状态为来把文章分类在分类分为服务类和活动类
+  文章分类名称
+  分类简介
+文章表：
+  创建一个状态位分类id来使文章与分类建立联系
+  在显示文章添加的时候要先判断分类的状态位显示的可以选择
+  文章名
+  文章简介
+  文章录入时间
+内容表：
+  创建与文章内容相关的id使文章与内容链接起来
+  内容
+
+```
+## 问题
+```
+ 我的器牛云安装不上百度上传都安装不上；
 ```

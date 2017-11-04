@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
 class Brand extends ActiveRecord
 {
     public $imgFile;
-    public static $statusarr=['1'=>'显示','0'=>'隐藏','-1'=>'删除'];
+    public static $statusarr=['1'=>'显示','0'=>'隐藏'];
     public function rules()
     {
         return [

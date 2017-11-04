@@ -1,7 +1,6 @@
 
 
-<?php  echo   \yii\bootstrap\Html::a('添加品牌',['brand/add'],['class'=>'btn btn-success'])?>
-<?php  echo   \yii\bootstrap\Html::a('回收站',['brand/hide'],['class'=>'btn btn-warning'])?>
+<?php  echo   \yii\bootstrap\Html::a('首页',['brand/index'],['class'=>'btn btn-primar'])?>
 <table class="table">
     <tr>
         <th>id</th>
@@ -17,8 +16,8 @@
     <td><?=\yii\bootstrap\Html::img("@web/".$model->logo,['height'=>50])?></td>
     <td><?=$model->sort?></td>
     <td><?=\backend\models\Brand::$statusarr[$model->status]?></td>
-    <td><?php echo \yii\bootstrap\Html::a("编辑",['brand/edit','id'=>$model->id],['class'=>'btn btn-success'])?>
-         <?php echo \yii\bootstrap\Html::a("删除   ",['brand/del','id'=>$model->id],['class'=>'btn btn-warning'])?>
+    <td><?php echo \yii\bootstrap\Html::a("还原",['brand/hy','id'=>$model->id],['class'=>'btn btn-success'])?>
+         <?php echo \yii\bootstrap\Html::a("彻底删除   ",['brand/del','id'=>$model->id],['class'=>'btn btn-danger'])?>
 
         </td></tr>
 
@@ -28,10 +27,9 @@
 
     </table>
 <?php
-
 echo \yii\widgets\LinkPager::widget(
         [
-                'pagination' => $page,
+                'pagination' => $page
         ]
 )
 ?>

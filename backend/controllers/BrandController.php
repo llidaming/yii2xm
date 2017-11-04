@@ -33,7 +33,7 @@ class BrandController extends Controller
            ]
        );
 //       echo 111;exit;
-       $model=Brand::find()->limit($page->limit)->offset($page->offset)->orderBy(['sort'=>SORT_ASC])->all();
+       $model=Brand::find()->limit($page->limit)->offset($page->offset)->where(['status'=>1])->orderBy(['sort'=>SORT_ASC])->all();
        return $this->render('index',['models'=>$model,'page'=>$page]);
 
 
@@ -46,7 +46,7 @@ class BrandController extends Controller
 
    public function actionAdd(){
        $model=new Brand();
-//       $model->statusarr=['1'];
+       $model->status=1;
        $request=\Yii::$app->request;
        if($model->load($request->post())){
         $model->imgFile=UploadedFile::getInstance($model,'imgFile');
@@ -69,12 +69,12 @@ class BrandController extends Controller
      */
     public function actionEdit($id){
         $model=Brand::findOne($id);
-//       $model->statusarr=['1'];
+//        $model->status=1;
         $request=\Yii::$app->request;
         if($model->load($request->post())){
             $model->imgFile=UploadedFile::getInstance($model,'imgFile');
             if($model->validate()){
-                $imgPath='@web/images/'.time().rand(100,999).".".$model->imgFile->extension;
+                $imgPath='images/'.time().rand(100,999).".".$model->imgFile->extension;
 //         文件保存
                 $model->imgFile->saveAs($imgPath,false);
                 $model->logo=$imgPath;
@@ -85,11 +85,52 @@ class BrandController extends Controller
         return $this->render('add',['model'=>$model]);
 
     }
+
+    /**这里是隐藏的代码
+     * @param $id 删除id
+     * @return \yii\web\Response
+     */
    public function actionDel($id){
         $model=Brand::findOne($id);
-        $model->delete();
+//        $model->delete();
+      if( $model->status==0){
+          $model->delete();
+          return $this->redirect(['index']);
+      }else{
+          $model->status=0;
+       $model->save();
         return $this->redirect(['index']);
+      }
    }
 
+
+    /**
+     * @return string
+     * 显示品牌隐藏的视图
+     */
+    public function actionHide(){
+//每页显示的条数
+        $pageSize=3;
+//总的条数
+        $count=Brand::find()->count();
+//       创建分页对象
+        $page=new Pagination(
+            [
+                'pageSize'=>$pageSize,
+                'totalCount'=>$count
+            ]
+        );
+//       echo 111;exit;
+        $model=Brand::find()->limit($page->limit)->offset($page->offset)->where(['status'=>0])->orderBy(['sort'=>SORT_ASC])->all();
+        return $this->render('hide',['models'=>$model,'page'=>$page]);
+
+
+    }
+    public function actionHy($id){
+        $model=Brand::findOne($id);
+        $model->status=1;
+        $model->save();
+        return $this->redirect(['brand/index']);
+    }
 
 }
