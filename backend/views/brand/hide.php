@@ -13,7 +13,7 @@
     <?php foreach ($models as $model):?>
    <tr><td><?=$model->id?></td>
     <td><?=$model->name?></td>
-    <td><?=\yii\bootstrap\Html::img("@web/".$model->logo,['height'=>50])?></td>
+    <td><?=\yii\bootstrap\Html::img($model->image,['height'=>50])?></td>
     <td><?=$model->sort?></td>
     <td><?=\backend\models\Brand::$statusarr[$model->status]?></td>
     <td><?php echo \yii\bootstrap\Html::a("还原",['brand/hy','id'=>$model->id],['class'=>'btn btn-success'])?>

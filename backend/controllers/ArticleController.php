@@ -12,6 +12,7 @@ namespace backend\controllers;
 use backend\models\Article;
 use backend\models\ArticleBetail;
 use backend\models\ArticleCategory;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
@@ -22,8 +23,15 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
-        $model = Article::find()->where(['status'=>1])->all();
-        return $this->render('index', ['models' => $model]);
+        $pageSize=3;
+        $count=Article::find()->count();
+//        创建分页对象
+        $page=new Pagination([
+            'pageSize'=>$pageSize,
+            'totalCount'=>$count
+        ]);
+        $model = Article::find()->limit($page->limit)->offset($page->offset)->where(['status'=>1])->all();
+        return $this->render('index', ['models' => $model,'page'=>$page]);
     }
 
     /**
