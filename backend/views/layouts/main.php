@@ -38,7 +38,6 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => '品牌管理', 'url' => ['/brand/index']],
-        ['label' => '分类管理', 'url' => ['/goods-category/index']],
         ['label' => '文章管理', 'items'=>[
                 [
                 'label'=>'文章分类',
@@ -51,6 +50,18 @@ AppAsset::register($this);
         ],
 
     ],
+        ['label' => '分类管理', 'items'=>[
+            [
+                'label'=>'分类管理',
+                'url'=>'/goods-category/index'
+            ],
+            [
+                'label'=>'商品管理',
+                'url'=>'/goods/index',
+            ],
+        ],
+
+        ],
         ];
 
     if (Yii::$app->user->isGuest) {

@@ -55,3 +55,64 @@ CRM 客户关系管理
  我的器牛云安装不上百度上传都安装不上；
  
 ```
+### 分类管理
+
+
+## 需求
+```
+1、分类的增删改查
+2、无限极分类ztree
+
+```
+## 流程
+```angular2html
+1、先把增删改查的基本功能完成
+2、在编辑的时候级别高的不能修改的级别低的下面
+3、在显示的时候需要显示级别的关系
+4、删除在删除的时候有子类的不能删除和父节点也可以删除
+```
+## 问题
+
+## 商品管理
+## 1、需求
+```angular2html
+1、商品的增删改查
+2、货号是当添加商品的时候就自动生成
+3、商品详情需要富文本编辑器
+4、列表页可以进行搜索
+```
+## 2、流程
+```
+1、先创建四个表
+   goods_day_count
+   goods
+   goods_intro
+   goods_gallery
+2、在做添加goods表的时候在添加页面就把添加详情和多图片一起完成
+3、富文本框用插件完成
+4、删除在删除goods表的时候其它表的所有数据也一并删除   
+```
+##3、问题
+```angular2html
+多图片回显的时候
+     }
+     控制器
+   $path=GoodsGallery::find()->where(['goods_id'=>$id])->all();
+      foreach ($path as $v){
+           $gallery->imgFile[]=$v->path;
+     }
+     视图
+     echo $form->field($gallery,'imgFile')->widget('manks\FileInput', [
+         'clientOptions' => [
+             'pick' => [
+                 'multiple' => true,
+             ],
+             'server' =>\yii\helpers\Url::to(['uploads']),
+             'accept' => [
+                 'extensions' => 'gif,jpg,jpeg,bmp,png',
+              ],
+         ],
+     ]);
+     imgFile不能命名和数据库一样的图片字段不然就会报错
+     总结：在给图片命名的时候还是一般不要与数据库的图片命名一样
+```
