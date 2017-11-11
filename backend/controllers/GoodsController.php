@@ -44,10 +44,10 @@ class GoodsController extends Controller
 //        不能这样写会报错
 //        $requests=$request->get()['GoodsSearchForm'];
 //        接收变量
-      $keyWord=$requests['keyWord'];
+         $keyWord=$requests['keyWord'];
 //        var_dump($keyWord);exit;
-        $minPrice=$requests['minPrice'];
-        $maxPrice=$requests['maxPrice'];
+         $minPrice=$requests['minPrice'];
+         $maxPrice=$requests['maxPrice'];
 //        $status=$requests['status'];
         if($minPrice>0){
 ////            拼接条件
@@ -66,12 +66,12 @@ class GoodsController extends Controller
 //        没页显示的条数
 
 //      总条数
-       $count=$query->count();
+        $count=$query->count();
         $searchForm=new GoodsSearchForm();
-   $page=new Pagination([
+        $page=new Pagination([
        'pageSize'=>3,
        'totalCount'=>$count
-   ]);
+        ]);
    $models=$query->limit($page->limit)->offset($page->offset)->all();
 //   $models=Goods::find()->limit($page->limit)->offset($page->offset)->where(['status'=>1])->orderBy('sort')->all();
 //        var_dump($models);exit;
@@ -290,7 +290,10 @@ class GoodsController extends Controller
 
 
 
-//  public function actionIntro($id){
-//
-//  }
+  public function actionIntro($id){
+     $model=GoodsIntro::findOne(['goods_id'=>$id]);
+
+//     显示页面
+      return $this->render('intro',['model'=>$model]);
+}
 }

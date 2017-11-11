@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\GoodsCategory;
 use yii\data\ActiveDataProvider;
+use yii\db\Exception;
 use yii\helpers\Json;
 
 /**
@@ -30,6 +31,11 @@ class GoodsCategoryController extends \yii\web\Controller
         ]);
     }
 
+    public function actionIndex1(){
+        $cate=GoodsCategory::find()->all();
+
+        return $this->render('index1', ['cates' => $cate]);
+    }
     /**
      * 创建分类根目录
      *
@@ -74,16 +80,24 @@ class GoodsCategoryController extends \yii\web\Controller
         if($model->load($request->post())){
 //            $goods=GoodsCategory::find()->where()->
 //            if
-//          判断是否是创建根目录
-            if($model->parent_id==0){
+            try{
+                //          判断是否是创建根目录
+                if($model->parent_id==0){
 //              创建根目录分类
-                $model->makeRoot();
+                    $model->makeRoot();
 
-            }else{
+                }else{
 //           创建子类分类
-                $cateParent=GoodsCategory::findOne(['id'=>$model->parent_id]);
-                $model->prependTo($cateParent);
+                    $cateParent=GoodsCategory::findOne(['id'=>$model->parent_id]);
+                    $model->prependTo($cateParent);
+                }
+//        $e 这个变量必须是这个异常类Exception的对象通过异常捕获得到不能修改到子类的才跳转
+            }catch (Exception $e){
+        \Yii::$app->session->setFlash("danger",$e->getMessage());
+         return $this->refresh();
             }
+
+
             \Yii::$app->session->setFlash("success","创建分类成功");
             return $this->redirect(['index']);
         }
@@ -103,7 +117,10 @@ class GoodsCategoryController extends \yii\web\Controller
         if($v){
             \Yii::$app->session->setFlash("success","有子分类不能删除");
         }else{
-            $model->delete();
+//            删除节点和根节点
+            $model->deleteWithChildren();
+//            这个不能删除根节点
+//            $model->delete();
             \Yii::$app->session->setFlash('success',"删除分类成功");
         }
         return $this->redirect(['index']);

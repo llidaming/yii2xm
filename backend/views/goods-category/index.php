@@ -1,4 +1,4 @@
-
+<?=\yii\bootstrap\Html::a("添加分类",['goods-category/add'],['class'=>'btn btn-success'])?>
 <?= \leandrogehlen\treegrid\TreeGrid::widget([
     'dataProvider' => $dataProvider,
     'keyColumnName' => 'id',
@@ -11,6 +11,10 @@
         'name',
         'id',
         'parent_id',
-        ['class' => 'yii\grid\ActionColumn']
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{edit}{del}'
+        ]
     ]
-]); ?>
+]);
+?>

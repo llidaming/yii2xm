@@ -64,8 +64,10 @@
         <td><?=\backend\models\Goods::$statusarr[$model->status]?></td>
         <td><?=$model->sort?></td>
         <td><?=date("Y-m-d H:i:s",$model->inputtime)?></td>
-        <td><?=\yii\bootstrap\Html::a("编辑",['goods/edit','id'=>$model->id])?>
-           <?=\yii\bootstrap\Html::a("删除",['goods/del','id'=>$model->id])?>
+        <td><?=\yii\bootstrap\Html::a("编辑",['goods/edit','id'=>$model->id],['class'=>'btn btn-success'])?>
+            <?=\yii\bootstrap\Html::a("详情",['goods/intro','id'=>$model->id],['class'=>'btn btn-info'])?>
+           <?=\yii\bootstrap\Html::a("删除",['goods/del','id'=>$model->id],['class'=>'btn btn-danger'])?>
+
         </td>
     </tr>
 <?php endforeach;?>

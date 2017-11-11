@@ -97,4 +97,10 @@ class GoodsCategory extends \yii\db\ActiveRecord
             'parent_id' => '分类父id',
         ];
     }
+
+//根据深度给分类加“-”
+    public function getNameText(){
+        return str_repeat("-",4*$this->depth).$this->name;
+    }
+
 }
