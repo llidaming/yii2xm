@@ -11,8 +11,10 @@ namespace backend\controllers;
 
 use backend\models\Admin;
 use backend\models\AdminForm;
+use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
+use yii\widgets\LinkPager;
 
 class AdminController extends Controller
 {
@@ -20,12 +22,19 @@ class AdminController extends Controller
      * @return string
      * 显示视图
      */
+
     public function actionIndex(){
-        $admin=Admin::find()->all();
+        $pageSize=3;
+        $count=Admin::find()->count();
+        $page=new Pagination([
+            'pageSize'=>$pageSize,
+            'totalCount'=>$count,
+        ]);
+        $admin=Admin::find()->limit($page->limit)->offset($page->offset)->all();
 
 //        显示视图
 
-     return $this->render('index',['models'=>$admin]);
+     return $this->render('index',['models'=>$admin,'page'=>$page]);
     }
 
     /**
@@ -41,7 +50,7 @@ class AdminController extends Controller
           $roles=$auth->getRoles();
 //          var_dump($role);exit;
 //        把所有的角色对象转化为数组
-          $roles=ArrayHelper::map($roles,"name",'description');
+          $roles=ArrayHelper::map($roles,"name",'name');
 //          var_dump($role);exit;
         if($request->isPost){
 //            var_dump($request->post());exit;
@@ -156,7 +165,7 @@ class AdminController extends Controller
                       $admin->last_login_ip=\Yii::$app->request->userIP;
                       $admin->last_login_time=time();
                       $admin->save();
-                      return $this->redirect(['index']);
+                      return $this->redirect(['home']);
                   }else{
                       $form->addError('password',"密码错误");
                   }
@@ -191,5 +200,10 @@ class AdminController extends Controller
         $auth->revokeAll($id);
         $admin->delete();
         return $this->redirect(['index']);
+    }
+
+//  后台首页
+    public function actionHome(){
+        return $this->render('home');
     }
 }

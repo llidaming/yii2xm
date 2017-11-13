@@ -89,8 +89,10 @@ class GoodsController extends Controller
         $gallery=new GoodsGallery();
         $model->status=1;
         $model->is_on_sale=1;
-        $category=GoodsCategory::find()->all();
-        $category=ArrayHelper::map($category,'id','name');
+        $category=GoodsCategory::find()->orderBy('tree','lft')->all();
+        //拼接
+//        $catesArray=ArrayHelper::map($cates,'id','nameText');
+        $category=ArrayHelper::map($category,'id','nameText');
         $brand=Brand::find()->all();
         $brand=ArrayHelper::map($brand,'id','name');
         $request=\Yii::$app->request;
@@ -167,7 +169,7 @@ class GoodsController extends Controller
         $gallery=new GoodsGallery();
 //        $model->status=1;
 //        $model->is_on_sale=1;
-        $category=GoodsCategory::find()->all();
+        $category=GoodsCategory::find()->orderBy('tree','lft')->all();
         $category=ArrayHelper::map($category,'id','name');
         $brand=Brand::find()->all();
         $brand=ArrayHelper::map($brand,'id','name');

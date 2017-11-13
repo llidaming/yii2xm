@@ -18,7 +18,7 @@
             <td><?=$model->intro?></td>
             <td><?=\backend\models\ArticleCategory::$ishelparr[$model->is_help]?></td>
             <td><?=\yii\bootstrap\Html::a("编辑",["article-category/edit" ,'id'=>$model->id],['class'=>'btn btn-info'])?>
-                <?=\yii\bootstrap\Html::a("删除",["article-category/del",'id'=>$model->id],['class'=>'btn btn-info'])?></td>
+                <?=\yii\bootstrap\Html::a("删除",["article-category/del",'id'=>$model->id],['class'=>'btn btn-danger'])?></td>
         </tr>
     <?php endforeach;?>
 </table>

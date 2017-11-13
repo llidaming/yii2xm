@@ -20,9 +20,10 @@
         <td><?=$model->category->name?></td>
         <td><?=$model->intro?></td>
 
-        <td><?=\yii\bootstrap\Html::a("编辑",["article/edit",'id'=>$model->id],['class'=>'btn btn-info'])?>
-        <?=\yii\bootstrap\Html::a("删除",["article/del",'id'=>$model->id],['class'=>'btn btn-info'])?>
-        <?=\yii\bootstrap\Html::a("查看",["article-betail/sel",'id'=>$model->id],['class'=>'btn btn-info'])?>
+        <td><?=\yii\bootstrap\Html::a("编辑",["article/edit",'id'=>$model->id],['class'=>'btn  btn-primary'])?>
+            <?=\yii\bootstrap\Html::a("查看",["article-betail/sel",'id'=>$model->id],['class'=>'btn btn-info'])?>
+        <?=\yii\bootstrap\Html::a("删除",["article/del",'id'=>$model->id],['class'=>'btn btn-danger'])?>
+
         </td>
     </tr>
     <?php endforeach;?>

@@ -11,7 +11,12 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'rbac' => [
+            'class' => 'mdm\admin\Module',
+//            'layout' => 'left-menu'
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -22,6 +27,7 @@ return [
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
             'loginUrl' => 'admin/login',
         ],
+
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
@@ -47,5 +53,24 @@ return [
         ],
 
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+//            白名单可以访问的权限
+        'allowActions' => [
+//            设置访问权限的
+//            'rbac/*',
+//            '*',
+//            'admin/*',
+            'admin/login',
+            'admin/logout',
+            'some-controller/some-action',
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
+        ]
+    ],
     'params' => $params,
+    'name'=>'校园商城',
 ];

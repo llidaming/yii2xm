@@ -22,11 +22,17 @@
         <td><?=date("Y-m-d H:i:s",$model->last_login_time)?></td>
         <td><?=$model->last_login_ip?></td>
         <td>
-            <?=\yii\bootstrap\Html::a("编辑",['admin/edit','id'=>$model->id],['class'=>'btn btn-success'])?>
-            <?=\yii\bootstrap\Html::a("删除",['admin/del','id'=>$model->id],['class'=>'btn btn-success'])?>
+            <?=\yii\bootstrap\Html::a("编辑",['admin/edit','id'=>$model->id],['class'=>'btn btn-info'])?>
+            <?=\yii\bootstrap\Html::a("删除",['admin/del','id'=>$model->id],['class'=>'btn btn-danger'])?>
 
         </td>
     </tr>
 <?php endforeach;?>
 
 </table>
+<?php
+echo \yii\widgets\LinkPager::widget([
+    'pagination' => $page,
+])
+
+?>

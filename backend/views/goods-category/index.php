@@ -13,7 +13,7 @@
         'parent_id',
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{edit}{del}'
+            'template' => '{update}{delete}'
         ]
     ]
 ]);

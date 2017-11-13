@@ -74,7 +74,7 @@ class GoodsCategoryController extends \yii\web\Controller
      * 这里是处理修改的代码
      */
 
-    public function actionEdit($id){
+    public function actionUpdate($id){
         $model=GoodsCategory::findOne($id);
         $request=\Yii::$app->request;
         if($model->load($request->post())){
@@ -110,7 +110,7 @@ class GoodsCategoryController extends \yii\web\Controller
 
     }
 
-    public function actionDel($id){
+    public function actionDelete($id){
         $model=GoodsCategory::findOne($id);
         $v=GoodsCategory::find()->where(['parent_id'=>$id])->all();
 //       var_dump($v);exit;

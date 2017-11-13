@@ -116,3 +116,22 @@ CRM 客户关系管理
      imgFile不能命名和数据库一样的图片字段不然就会报错
      总结：在给图片命名的时候还是一般不要与数据库的图片命名一样
 ```
+## RBAC
+```angular2html
+1、权限控制需求
+   每个用户拥有不同的权限
+   每个用户必需登录才能访问后台
+   左侧菜单自动显示
+   
+```
+## 流程
+```angular2html
+1、首先用数据迁移生成4个表自带的在yii2授权安全中
+2、在用插件mdmsoft/yii2-admin 生成RBAC
+3、根据数据迁移生成yii migrate --migrationPath=@mdm/admin/migrations生成menu表
+4、根据mdm\admin\components\MenuHelper::getAssignedMenu()在主配置文件中设置生成自动左边权限菜单显示
+```
+## 设计要点与难点
+难点：授权的权限在左边的自动显示
+解决根据插件实现
+
