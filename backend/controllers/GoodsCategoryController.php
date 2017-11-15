@@ -52,9 +52,15 @@ class GoodsCategoryController extends \yii\web\Controller
                   $model->makeRoot();
 
           }else{
+//              var_dump($request->post());exit;
 //           创建子类分类
               $cateParent=GoodsCategory::findOne(['id'=>$model->parent_id]);
+              if($cateParent['depth']<=2){
               $model->prependTo($cateParent);
+              }else{
+                  \Yii::$app->session->setFlash('danger',"不能添加三级以上分类");
+                  return $this->refresh();
+              }
           }
           \Yii::$app->session->setFlash("success","创建分类成功");
           return $this->redirect(['index']);
